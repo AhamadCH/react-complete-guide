@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, { StyleRoot } from 'radium';
+import styled from 'styled-components';
 import Person from './Person/Person';
 
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -42,18 +55,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
 
     let persons = null;
     const classes = [];
@@ -81,68 +82,19 @@ class App extends Component {
           })}
         </div> 
       );
-
-      style.backgroundColor = 'red';
-      style[':hover'] =  {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
     return (
-      
-      <StyleRoot>
         <div className="App">
           <h1>Hi, I'm a React App</h1>
           <p className={classes.join(' ')}>This is really working fine.</p>
-          <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+          <StyledButton alt={this.state.showPerson} onClick={this.togglePersonHandler}>
+            Toggle Persons
+          </StyledButton>
           {persons}
         </div>
-      </StyleRoot>
     );
   }
 }
 
-// const App = props => {
-//   const [personState, setPersonState] = useState({
-//     persons: [
-//       {name: 'Ahamad', age: 24},
-//       {name: 'Arun', age: 23},
-//       {name: 'Gautam', age: 25}
-//     ]
-//   });
-
-//   const switchHandler = () => {
-//     setPersonState({
-//       persons: [
-//         {name: 'Ahamad CH', age: 24},
-//         {name: 'Arun A', age: 23},
-//         {name: 'Gautam G', age: 25}
-//       ]
-//     })
-//   }
-
-//   // render() {
-//     return (
-//       <div className="App">
-//         <h1>Hi, I'm a React App</h1>
-//         <button onClick={switchHandler}>Switch</button>
-//         <Person
-//           name={personState.persons[0].name}
-//           age={personState.persons[0].age}
-//         />
-//         <Person
-//           name={personState.persons[1].name}
-//           age={personState.persons[1].age}
-//         />
-//         <Person
-//           name={personState.persons[2].name}
-//           age={personState.persons[2].age}
-//           onClick={switchHandler}
-//         >Hobby: Talking</Person>
-//       </div>
-//     );
-//   // }
-// }
-
-export default Radium(App);
+export default App;
