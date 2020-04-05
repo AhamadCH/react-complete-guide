@@ -19,7 +19,7 @@ const cocktail = (props) => {
 
   return (
     <div className={classes.Cockpit}>
-      <h1>Hi, I'm a React App</h1>
+      <h1>{props.appTitle}</h1>
       <p className={assignedClasses.join(' ')}>This is really working fine.</p>
       <button className={btnClass.join(' ')} onClick={props.toggle}>
         Toggle Persons

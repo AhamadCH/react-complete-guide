@@ -5,13 +5,29 @@ import Persons from '../components/Persons/Persons';
 
 
 class App extends Component {
-  state = {
-    persons: [
-      {id: '0', name: 'Ahamad', age: 24},
-      {id: '1', name: 'Arun', age: 23},
-      {id: '2', name: 'Gautam', age: 25}
-    ],
-    showPerson: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      persons: [
+        {id: '0', name: 'Ahamad', age: 24},
+        {id: '1', name: 'Arun', age: 23},
+        {id: '2', name: 'Gautam', age: 25}
+      ],
+      showPerson: false
+    }
+  }
+
+  componentWillMount() {
+    console.log('[App.js] componentWillMount');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
   }
 
   togglePersonHandler = () => {
@@ -58,6 +74,7 @@ class App extends Component {
     return (
         <div className={classes.App}>
           <Cockpit
+            appTitle={this.props.appTitle}
             persons={this.state.persons}
             showPerson={this.state.showPerson}
             toggle={this.togglePersonHandler}
