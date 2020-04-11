@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
 
-const cocktail = (props) => {
+const Cockpit = (props) => {
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+
+    setTimeout(() => {
+      alert('Saverd data to the cluod!');
+    }, 1000);
+
+    return () => {
+      console.log('[Cockpit.js] clean up work in useEffect');
+    }
+  }, [props.persons]);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+
+    return () => {
+      console.log('[Cockpit.js] clean up work in 2nd useEffect');
+    }
+  });
+
   const assignedClasses = [];
   let btnClass = [];
 
@@ -28,4 +48,4 @@ const cocktail = (props) => {
   )
 };
 
-export default cocktail;
+export default Cockpit;
