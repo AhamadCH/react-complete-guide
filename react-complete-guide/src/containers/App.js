@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Auxiliary from '../hoc/Auxiliary';
 import classes from './App.module.css';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Persons from '../components/Persons/Persons';
@@ -83,6 +84,7 @@ class App extends Component {
     }
 
     return (
+      <Auxiliary>
         <div className={classes.App}>
           <button onClick={() => this.setState({showCockpit: false})}>Remove Cockpit</button>
           {this.state.showCockpit ? <Cockpit
@@ -93,6 +95,7 @@ class App extends Component {
           /> : null}
           {persons}
         </div>
+      </Auxiliary>
     );
   }
 }
